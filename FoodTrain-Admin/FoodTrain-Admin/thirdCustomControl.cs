@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FoodTrain_Admin
@@ -15,7 +9,7 @@ namespace FoodTrain_Admin
     public partial class thirdCustomControl : UserControl
     {
         //access database koneksi string
-        string PesananConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\WIN10x64\\Documents\\Foodtrain-App\\db_access.accdb";
+        string PesananConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\WIN10x64\OneDrive\Desktop\FoodTrain-App\\db_access.accdb";
         //query for interesting data into pesanan
         string insertDataIntoPesanan = "INSERT INTO Pesanan (Nama, Jumlah) VALUES (?,?)";
         //query for seleting from pesanan
@@ -140,7 +134,7 @@ namespace FoodTrain_Admin
                 txtID.Text = selectDataGridViewRow.Cells[0].Value.ToString();
                 txtNama.Text = selectDataGridViewRow.Cells[1].Value.ToString();
                 txtJumlah.Text = selectDataGridViewRow.Cells[2].Value.ToString();
-               
+
             }
         }
 
@@ -252,6 +246,42 @@ namespace FoodTrain_Admin
                 txtID.Text = string.Empty;
                 txtNama.Text = string.Empty;
                 txtJumlah.Text = string.Empty;
+            }
+        }
+
+        private void printDataGridView_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Bitmap printDataGridViewBitmap = new Bitmap(this.dataGridView1.Width, this.dataGridView1.Height);
+            dataGridView1.DrawToBitmap(printDataGridViewBitmap, new Rectangle(0, 0, this.dataGridView1.Width, this.dataGridView1.Height));
+            e.Graphics.DrawImage(printDataGridViewBitmap, 0, 0);
+        }
+
+        //Print DataGridView to Excel
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PrintDialog pringDataGridViewDialog = new PrintDialog();
+                //Document
+                pringDataGridViewDialog.Document = printDataGridView;
+
+                pringDataGridViewDialog.UseEXDialog = true;
+                //Dialog Result
+                DialogResult pringDataGridViewDialogResult = pringDataGridViewDialog.ShowDialog();
+
+                if (pringDataGridViewDialogResult == DialogResult.OK)
+                {
+                    //Document name
+                    printDataGridView.DocumentName = "Print DataGridView";
+                    //print function
+                    printDataGridView.Print();
+                    //Output message after printing DGV successfully
+                    MessageBox.Show("DataGridView Print Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

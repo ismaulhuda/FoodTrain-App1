@@ -43,7 +43,9 @@ namespace FoodTrain_User
 
         private void btnPesan_Click(object sender, EventArgs e)
         {
-
+            SidePanel.Height = btnPesan.Height;
+            SidePanel.Top = btnPesan.Top;
+            pesananCustomControl1.BringToFront();
         }
 
         private void btnKeluar_Click(object sender, EventArgs e)

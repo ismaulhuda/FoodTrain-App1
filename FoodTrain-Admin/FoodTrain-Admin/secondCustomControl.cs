@@ -15,7 +15,7 @@ namespace FoodTrain_Admin
     public partial class secondCustomControl : UserControl
     {
         //access database koneksi string
-        string MinumanConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\WIN10x64\\Documents\\Foodtrain-App\\db_access.accdb";
+        string MinumanConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\WIN10x64\OneDrive\Desktop\FoodTrain-App\\db_access.accdb";
         //query for interesting data into microsoft access database
         string insertDataIntoMinuman = "INSERT INTO Minuman (Nama, Jenis, Harga, Deskripsi, ImagePath, ImageFile) VALUES (?,?,?,?,?,?)";
         //query for seleting from makanan
